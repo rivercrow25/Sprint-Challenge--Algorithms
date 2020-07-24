@@ -103,18 +103,24 @@ class SortingRobot:
         my plan is to create a bubble sort and to use the light to indicate that a swap was made durring the pass through and rerun the sort mechanic until the light never turns on
 
         """
-        self.set_light_off()
-        self.swap_item()
+
         while self.can_move_right():
+            self.set_light_off()
+            self.swap_item()
+            self.move_right()
             if self.compare_item() == 1:
                 self.move_right()
             elif self.compare_item() == -1:
                 self.set_light_on()
                 self.swap_item()
+            elif self.compare_item() is None:
+                self.swap_item()
+        self.swap_item()
         while self.can_move_left():
             self.move_left()
         if self.light_is_on():
             self.sort()
+        self.swap_item()
 
 
 if __name__ == "__main__":
