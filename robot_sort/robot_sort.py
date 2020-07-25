@@ -103,31 +103,36 @@ class SortingRobot:
         my plan is to create a bubble sort and to use the light to indicate that a swap was made durring the pass through and rerun the sort mechanic until the light never turns on
 
         """
-
+        self.set_light_off()
         while self.can_move_right():
-            self.set_light_off()
             self.swap_item()
             self.move_right()
+
             if self.compare_item() == 1:
+                self.swap_item()
+                self.move_left()
+                self.swap_item()
                 self.move_right()
-            elif self.compare_item() == -1:
                 self.set_light_on()
+            elif self.compare_item() == -1:
+                self.move_left()
                 self.swap_item()
+                self.move_right()
             elif self.compare_item() is None:
-                self.swap_item()
-        self.swap_item()
+                break
+
         while self.can_move_left():
             self.move_left()
         if self.light_is_on():
             self.sort()
-        self.swap_item()
 
 
 if __name__ == "__main__":
     # Test our your implementation from the command line
     # with `python robot_sort.py`
 
-    l = [5, 3, 8, 6, 3]
+    l = [1, -38, -95, 4, 23, -73, -65, -36, 85, 2, 58, -26, -55, 96, 55, -76, 64, 45, 69, 36, 69, 47, 29, -47, 13, 89, -57, -88, -87, 54, 60, 56, -98, -78, 59, 93, -41, -74, 73, -35, -23, -79, -35, 46, -18, -18, 37, -64, 14, -
+         57, -2, 15, -85, 45, -73, -2, 79, -87, -100, 21, -51, 22, 26, -59, 81, 59, -24, 24, -81, 43, 61, 52, 38, -88, -95, 87, -57, -37, -65, -47, -3, 21, -77, 98, 25, 1, -36, 39, 78, 47, -35, -40, -69, -81, 11, -47, 21, 25, -53, -31]
 
     robot = SortingRobot(l)
 
